@@ -1,4 +1,4 @@
 singleton/
-├── main.go                  # Cliente: obtiene siempre la misma instancia
+├── main.go                  # Cliente: obtiene siempre la misma conexión a DB
 └── singleton/               # Singleton concreto
-    └── logger.go            #   Logger + GetInstance (sync.Once)
+    └── database.go          #   Database + GetInstance (sync.Mutex)
