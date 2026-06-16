@@ -4,14 +4,19 @@ import (
 	"strings"
 
 	"design-patterns/estructurales/adapter/adaptee"
+	"design-patterns/estructurales/adapter/target"
 )
 
 type SubaruAdapter struct {
+	target.Vehicle
 	subaru *adaptee.SubaruImpreza
 }
 
 func NewSubaruAdapter(subaru *adaptee.SubaruImpreza) *SubaruAdapter {
-	return &SubaruAdapter{subaru: subaru}
+	return &SubaruAdapter{
+		Vehicle: target.Vehicle{Nombre: "Subaru Impreza"},
+		subaru:  subaru,
+	}
 }
 
 func (a *SubaruAdapter) Avanzar() string {
@@ -20,7 +25,8 @@ func (a *SubaruAdapter) Avanzar() string {
 		a.subaru.InsertarLlave(),
 		a.subaru.GirarLlave(),
 		a.subaru.SoltarFreno(),
-		"Subaru Impreza: avanzando",
 	}
-	return strings.Join(steps, "\n")
+	result := strings.Join(steps, "\n")
+	target.PrintAvance(result, a.Nombre)
+	return result
 }

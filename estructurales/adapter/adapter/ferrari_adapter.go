@@ -4,14 +4,19 @@ import (
 	"strings"
 
 	"design-patterns/estructurales/adapter/adaptee"
+	"design-patterns/estructurales/adapter/target"
 )
 
 type FerrariAdapter struct {
+	target.Vehicle
 	ferrari *adaptee.FerrariModerna
 }
 
 func NewFerrariAdapter(ferrari *adaptee.FerrariModerna) *FerrariAdapter {
-	return &FerrariAdapter{ferrari: ferrari}
+	return &FerrariAdapter{
+		Vehicle: target.Vehicle{Nombre: "Ferrari moderna"},
+		ferrari: ferrari,
+	}
 }
 
 func (a *FerrariAdapter) Avanzar() string {
@@ -19,7 +24,8 @@ func (a *FerrariAdapter) Avanzar() string {
 		a.ferrari.PresionarFreno(),
 		a.ferrari.PonerEnNeutral(),
 		a.ferrari.ApretarBotonStart(),
-		"Ferrari moderna: avanzando",
 	}
-	return strings.Join(steps, "\n")
+	result := strings.Join(steps, "\n")
+	target.PrintAvance(result, a.Nombre)
+	return result
 }

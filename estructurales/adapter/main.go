@@ -15,7 +15,7 @@ func main() {
 	}
 
 	for _, vehiculo := range vehiculos {
-		fmt.Println(vehiculo.Avanzar())
+		vehiculo.Avanzar()
 		fmt.Println()
 	}
 }
